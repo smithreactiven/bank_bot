@@ -8,6 +8,8 @@ BOT_TOKEN = env.str("BOT_TOKEN")
 BOT_ADMINS = env.list("BOT_ADMINS", subcast=int)
 THROTTLE_RATE = env.float("THROTTLE_RATE")
 
+APP_URL = env.str("APP_URL")
+
 PSQL_HOSTNAME = env.str("PSQL_HOSTNAME")
 PSQL_PORT = env.int("PSQL_PORT")
 PSQL_USERNAME = env.str("PSQL_USERNAME")
