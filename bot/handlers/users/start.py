@@ -5,7 +5,19 @@ from bot import keyboards, config
 import tools
 
 
-async def start_handler(message: types.Message):
+async def start_handler(message: types.Message, session):
+    async with session() as open_session:
+        user_in_db = await open_session.execute(select(models.sql.User).filter_by(id=message.from_user.id))
+        user_in_db = user_in_db.scalars().first()
+        if not user_in_db:
+            new_user = models.sql.User(
+                id=message.from_user.id,
+                username=message.from_user.username,
+                first_name=message.from_user.first_name,
+                last_name=message.from_user.last_name
+            )
+            await open_session.merge(new_user)
+            await open_session.commit()
     web_app_info = types.WebAppInfo(url=config.APP_URL)
     menu_btn = types.MenuButtonWebApp(
         text="Открыть",
