@@ -12,4 +12,4 @@ class User(Base):
     username = Column(String, default=None)
     first_name = Column(String)
     last_name = Column(String)
-
+    check = Column(BigInteger)

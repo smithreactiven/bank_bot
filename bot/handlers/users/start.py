@@ -1,7 +1,8 @@
 from aiogram import types, Dispatcher
 from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardButton
 from aiogram.filters import CommandStart, Command
-from bot import keyboards, config
+from sqlalchemy import select
+from bot import keyboards, config, models
 import tools
 
 
@@ -14,7 +15,8 @@ async def start_handler(message: types.Message, session):
                 id=message.from_user.id,
                 username=message.from_user.username,
                 first_name=message.from_user.first_name,
-                last_name=message.from_user.last_name
+                last_name=message.from_user.last_name,
+                check=0
             )
             await open_session.merge(new_user)
             await open_session.commit()
