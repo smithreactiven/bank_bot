@@ -4,6 +4,7 @@ from aiogram.filters import CommandStart, Command, CommandObject
 from sqlalchemy import select
 from bot import keyboards, config, models
 import tools
+import re
 
 
 async def start_handler(message: types.Message, session, command: CommandObject):
